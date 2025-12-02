@@ -1,11 +1,11 @@
 package es.hgg.advent2025.day01
 
 import es.hgg.advent2025.common.ChallengeInput
-import es.hgg.advent2025.common.Input
+import es.hgg.advent2025.common.PuzzleInput
 import es.hgg.advent2025.common.useLines
 
 
-class Day01Part01(val input: Input = ChallengeInput(1)) {
+class Day01Part01(val input: PuzzleInput = ChallengeInput(1)) {
 
     fun run() {
         val (position, count) = input.useLines { lines ->

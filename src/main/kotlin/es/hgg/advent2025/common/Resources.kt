@@ -1,14 +1,19 @@
 package es.hgg.advent2025.common
 
+import java.io.FileNotFoundException
+import java.io.InputStream
+
 
 interface Input {
-    fun<T> readLines(callback: (Sequence<String>) -> T): T
+    fun stream(): InputStream
 }
 
-abstract class ResourceInput(private val path: String) : Input {
-    private fun stream() = javaClass.getResourceAsStream("/inputs/$path")
-    override fun<T> readLines(callback: (Sequence<String>) -> T): T = stream()!!.bufferedReader().useLines(callback)
+fun<T> Input.useLines(block: (Sequence<String>) -> T) = stream().bufferedReader().useLines(block)
+
+sealed class ResourceInput(private val path: String) : Input {
+    override fun stream(): InputStream = javaClass.getResourceAsStream("/inputs/$path")
+        ?: throw FileNotFoundException()
 }
 
-class ExampleInput(day: String) : ResourceInput("day$day/example")
-class ChallengeInput(day: String) : ResourceInput("day$day/input")
+class ExampleInput(day: Int) : ResourceInput("day${day.toString().padStart(2, '0')}/example")
+class ChallengeInput(day: Int) : ResourceInput("day${day.toString().padStart(2, '0')}/input")

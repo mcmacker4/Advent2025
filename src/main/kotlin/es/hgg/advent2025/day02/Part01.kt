@@ -1,7 +1,6 @@
 package es.hgg.advent2025.day02
 
 import es.hgg.advent2025.common.ChallengeInput
-import es.hgg.advent2025.common.ExampleInput
 import es.hgg.advent2025.common.PuzzleInput
 import es.hgg.advent2025.common.readText
 

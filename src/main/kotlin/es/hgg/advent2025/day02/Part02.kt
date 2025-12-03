@@ -1,31 +1,22 @@
 package es.hgg.advent2025.day02
 
 import es.hgg.advent2025.common.ChallengeInput
-import es.hgg.advent2025.common.PuzzleInput
 import es.hgg.advent2025.common.readText
 import kotlin.time.measureTimedValue
 
 fun main() {
-    Day02Part02(ChallengeInput(2)).run()
-}
+    val (input, readDuration) = measureTimedValue { ChallengeInput(2).readText() }
 
-class Day02Part02(val input: PuzzleInput) {
+    println("Took $readDuration to read input")
 
-    fun run() {
-        val (input, readDuration) = measureTimedValue { input.readText() }
-
-        println("Took $readDuration to read input")
-
-        val (result, computeDuration) = measureTimedValue {
-            input.splitToSequence(",")
-                .flatMap { it.parseRange().findInvalidIds() }
-                .sum()
-        }
-
-        println(result)
-        println("Took $computeDuration to compute")
+    val (result, computeDuration) = measureTimedValue {
+        input.splitToSequence(",")
+            .flatMap { it.parseRange().findInvalidIds() }
+            .sum()
     }
 
+    println(result)
+    println("Took $computeDuration to compute")
 }
 
 private fun LongRange.findInvalidIds(): Sequence<Long> =

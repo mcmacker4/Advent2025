@@ -19,9 +19,11 @@ fun<T> PuzzleInput.useLines(block: (Sequence<String>) -> T) = stream().bufferedR
 
 sealed class ResourceInput(private val path: String) : PuzzleInput {
     override fun stream(): InputStream = javaClass.getResourceAsStream("/inputs/$path")
-        ?: throw FileNotFoundException()
+        ?: throw FileNotFoundException(path)
 }
 
 @Suppress("unused")
-class ExampleInput(day: Int) : ResourceInput("day${day.toString().padStart(2, '0')}/example")
-class ChallengeInput(day: Int) : ResourceInput("day${day.toString().padStart(2, '0')}/input")
+class ExampleInput(day: Int) : ResourceInput("${day.dir}/example")
+class ChallengeInput(day: Int) : ResourceInput("${day.dir}/input")
+
+private val Int.dir get() = "day${toString().padStart(2, '0')}"

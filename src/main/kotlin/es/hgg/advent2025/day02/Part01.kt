@@ -1,25 +1,16 @@
 package es.hgg.advent2025.day02
 
 import es.hgg.advent2025.common.ChallengeInput
-import es.hgg.advent2025.common.PuzzleInput
 import es.hgg.advent2025.common.readText
 
 fun main() {
-    Day02Part01(ChallengeInput(2)).run()
-}
+    val input = ChallengeInput(2).readText()
 
-class Day02Part01(val input: PuzzleInput) {
+    val result = input.splitToSequence(",")
+        .flatMap { it.parseRange().findInvalidIds() }
+        .sum()
 
-    fun run() {
-        val input = input.readText()
-
-        val result = input.splitToSequence(",")
-            .flatMap { it.parseRange().findInvalidIds() }
-            .sum()
-
-        println(result)
-    }
-
+    println(result)
 }
 
 private fun LongRange.findInvalidIds(): Sequence<Long> = asSequence().filter { id ->

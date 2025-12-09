@@ -1,14 +1,16 @@
-package es.hgg.advent2025.day03
+package es.hgg.advent2025.day03.part2
 
-import es.hgg.advent2025.common.ChallengeInput
-import es.hgg.advent2025.common.useLines
+import es.hgg.advent2025.common.challengeInput
 
 
 const val BATTERY_COUNT = 12
 
 fun main() {
-    val result = ChallengeInput(3).useLines { lines ->
-        lines.map(::calculateJoltage).sum()
+    val result = challengeInput(3) { reader ->
+        reader
+            .lineSequence()
+            .map(::calculateJoltage)
+            .sum()
     }
 
     println("FINAL: $result")

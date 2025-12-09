@@ -1,7 +1,6 @@
-package es.hgg.advent2025.day04.part02
+package es.hgg.advent2025.day04.part2
 
-import es.hgg.advent2025.common.ChallengeInput
-import es.hgg.advent2025.common.useLines
+import es.hgg.advent2025.common.challengeInput
 
 
 private data class Point(val x: Int, val y: Int) {
@@ -47,9 +46,8 @@ private fun World.fill(lines: List<String>) {
 private fun World(lines: List<String>) =
     World(lines[0].length, lines.size).apply { fill(lines) }
 
-fun main() {
-    val lines = ChallengeInput(4).useLines { it.toList() }
-    val world = World(lines)
+fun main() = challengeInput(4) { reader ->
+    val world = World(reader.readLines())
 
     var total = 0
 

@@ -1,12 +1,10 @@
-package es.hgg.advent2025.day02
+package es.hgg.advent2025.day02.part1
 
-import es.hgg.advent2025.common.ChallengeInput
-import es.hgg.advent2025.common.readText
+import es.hgg.advent2025.common.challengeInput
 
-fun main() {
-    val input = ChallengeInput(2).readText()
-
-    val result = input.splitToSequence(",")
+fun main() = challengeInput(2) { reader ->
+    val result = reader.readText()
+        .splitToSequence(",")
         .flatMap { it.parseRange().findInvalidIds() }
         .sum()
 

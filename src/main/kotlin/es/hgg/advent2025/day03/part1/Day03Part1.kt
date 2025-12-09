@@ -1,12 +1,14 @@
-package es.hgg.advent2025.day03
+package es.hgg.advent2025.day03.part1
 
-import es.hgg.advent2025.common.ChallengeInput
-import es.hgg.advent2025.common.useLines
+import es.hgg.advent2025.common.challengeInput
 
 
 fun main() {
-    val result = ChallengeInput(3).useLines { lines ->
-        lines.map(::calculateJoltage).sumOf { it.first * 10 + it.second }
+    val result = challengeInput(3) { reader ->
+        reader
+            .lineSequence()
+            .map(::calculateJoltage)
+            .sumOf { it.first * 10 + it.second }
     }
 
     println("Result: $result")

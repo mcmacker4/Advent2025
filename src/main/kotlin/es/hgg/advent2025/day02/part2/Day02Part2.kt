@@ -1,11 +1,12 @@
-package es.hgg.advent2025.day02
+package es.hgg.advent2025.day02.part2
 
-import es.hgg.advent2025.common.ChallengeInput
-import es.hgg.advent2025.common.readText
+import es.hgg.advent2025.common.challengeInput
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val (input, readDuration) = measureTimedValue { ChallengeInput(2).readText() }
+    val (input, readDuration) = measureTimedValue {
+        challengeInput(2) { it.readText() }
+    }
 
     println("Took $readDuration to read input")
 

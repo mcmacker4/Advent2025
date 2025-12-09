@@ -1,29 +1,16 @@
 package es.hgg.advent2025.common
 
+import java.io.BufferedReader
 import java.io.FileNotFoundException
 import java.io.InputStream
 
-
-interface PuzzleInput {
-    fun stream(): InputStream
-}
-
-fun PuzzleInput.readText(): String {
-    val reader = stream().bufferedReader()
-    val text = reader.readText()
-    reader.close()
-    return text
-}
-
-fun<T> PuzzleInput.useLines(block: (Sequence<String>) -> T) = stream().bufferedReader().useLines(block)
-
-sealed class ResourceInput(private val path: String) : PuzzleInput {
-    override fun stream(): InputStream = javaClass.getResourceAsStream("/inputs/$path")
-        ?: throw FileNotFoundException(path)
+private object ResourceInput {
+    fun stream(path: String): InputStream =
+        javaClass.getResourceAsStream("/inputs/$path") ?: throw FileNotFoundException(path)
 }
 
 @Suppress("unused")
-class ExampleInput(day: Int) : ResourceInput("${day.dir}/example")
-class ChallengeInput(day: Int) : ResourceInput("${day.dir}/input")
+fun<T> exampleInput(day: Int, block: (BufferedReader) -> T) = ResourceInput.stream("${day.dir}/example").bufferedReader().use(block)
+fun<T> challengeInput(day: Int, block: (BufferedReader) -> T) = ResourceInput.stream("${day.dir}/input").bufferedReader().use(block)
 
 private val Int.dir get() = "day${toString().padStart(2, '0')}"

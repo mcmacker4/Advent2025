@@ -1,12 +1,10 @@
-package es.hgg.advent2025.day01
+package es.hgg.advent2025.day01.part1
 
-import es.hgg.advent2025.common.ChallengeInput
-import es.hgg.advent2025.common.useLines
-
+import es.hgg.advent2025.common.challengeInput
 
 fun main() {
-    val (position, count) = ChallengeInput(1).useLines { lines ->
-        lines.map { line ->
+    val (position, count) = challengeInput(1) { reader ->
+        reader.lineSequence().map { line ->
             print(line)
             when {
                 line.startsWith("L") -> -line.substring(1).toInt()

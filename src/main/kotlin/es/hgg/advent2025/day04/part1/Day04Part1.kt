@@ -1,7 +1,6 @@
-package es.hgg.advent2025.day04.part01
+package es.hgg.advent2025.day04.part1
 
-import es.hgg.advent2025.common.ChallengeInput
-import es.hgg.advent2025.common.useLines
+import es.hgg.advent2025.common.challengeInput
 
 private data class Point(val x: Int, val y: Int) {
     operator fun plus(other: Point) = Point(x + other.x, y + other.y)
@@ -36,22 +35,18 @@ private class Map(val lines: List<String>) {
         (point.x in 0..<width) && (point.y in 0..<height) && (lines[point.y][point.x] == '@')
 }
 
-fun main() {
+fun main() = challengeInput(4) { reader ->
+    val map = Map(reader.readLines())
 
-    ChallengeInput(4).useLines { seq ->
-        val map = Map(seq.toList())
+    var count = 0
 
-        var count = 0
-
-        for (y in 0..<map.height) {
-            for (x in 0..<map.width) {
-                val pos = Point(x, y)
-                if (map[pos] && Kernel.surrounding(pos).count { map[it] } < 4)
-                    count++
-            }
+    for (y in 0..<map.height) {
+        for (x in 0..<map.width) {
+            val pos = Point(x, y)
+            if (map[pos] && Kernel.surrounding(pos).count { map[it] } < 4)
+                count++
         }
-
-        println("Result: $count")
     }
 
+    println("Result: $count")
 }
